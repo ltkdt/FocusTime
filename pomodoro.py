@@ -106,7 +106,7 @@ class Pomodoro(QWidget):
         if self.num_sessions % 2 == 0:
             self.showCounter("25")
         else:
-            self.showCounter("5")
+            self.showCounter("05")
         # Check the value of startWatch  variable to start or stop the Stop Watch
         
         #while True:
