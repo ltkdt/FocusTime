@@ -100,7 +100,6 @@ class Todo(QWidget):
         if self.openAddTask is None:
             self.openAddTask = AddTaskWindow()
         self.openAddTask.show()
-# Checking github actions :))
 '''
 app = QApplication(sys.argv)
 window = Window()
