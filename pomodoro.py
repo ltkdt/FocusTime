@@ -10,12 +10,8 @@ from playsound import playsound
 from numpy import add
 with open('data.json', 'r') as f:
     data = json.load(f)
-dates = data["Dates"]
-if len(dates) > 10:
-    print(True)
-    del dates[next(islice(dates, 0, None))]
-with open('data.json', 'w') as f:
-        json.dump(data,f)
+
+#This function will be called to add a pomodoro session to today
 
 def add_data_today(flag = True):
     today = date.today()
@@ -38,9 +34,11 @@ def add_data_today(flag = True):
 class Pomodoro(QWidget):
     def __init__(self):
         super().__init__()
+        ''' Clear the comments if you want to use as a standalone app
         self.setWindowTitle("FocusTime")
         self.setWindowIcon(QIcon("logo.png"))
         self.setGeometry(700,700, 600, 400)
+        '''
         self.setStyleSheet("background-color:#121212")
 
         self.counter = 0
@@ -86,8 +84,7 @@ class Pomodoro(QWidget):
         self.setLayout(self.layout)
         
     def onPomodoroSession(self):
-        #Disable the button from getting clicked
-        #QTimer.singleShot(5000, lambda: self.StartButton.setDisabled(False))
+        #Disable the button from getting clicked while still in a session
         self.startWatch = True
         self.StartButton.setEnabled(False)
     def onPomodoroReset(self):
@@ -107,30 +104,21 @@ class Pomodoro(QWidget):
             self.showCounter("25")
         else:
             self.showCounter("05")
-        # Check the value of startWatch  variable to start or stop the Stop Watch
-        
-        #while True:
-        '''
-            for i in range(4):
-                self.showCounter(2)
-                self.showCounter(1)
-            self.showCounter(3)
-            '''
+
     def showCounter(self,stop):
         if self.startWatch:
         
             self.counter += 1
 
-            # Count and set the time counter value
+            # Counter
             cnt = int((self.counter/10 - int(self.counter/10))*10)
             self.count = '0' + str(cnt)
-
-            # Set the second value
+            #Second
             if int(self.counter/10) < 10 :
                 self.second = '0' + str(int(self.counter / 10))
             else:
                 self.second = str(int(self.counter / 10))
-                # Set the minute value
+            #Minute
                 if self.counter / 10 == 60.0 :
                     self.second == '00'
                     self.counter = 0
@@ -140,13 +128,14 @@ class Pomodoro(QWidget):
                     else:
                         self.minute = str(min)
             text = self.minute + ':' + self.second + ':' + self.count
-        # Display the stop watch values in the label
+            #Update display
             self.CurTime.setText(text)
             
             if self.minute == stop:
                 self.onPomodoroReset()
                 playsound("sound.wav")
                 
+                #Check if the next session is a pomodoro one or a break
                 self.num_sessions += 1
                 if self.num_sessions % 2 == 1:
                     add_data_today()

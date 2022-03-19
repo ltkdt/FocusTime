@@ -12,32 +12,19 @@ from pomodoro import Pomodoro
 from todo import Todo,AddTaskWindow
 from chart import Chart
 
+
+
 with open('data.json', 'r') as f:
     data = json.load(f)
 dates = data["Dates"]
+
 if len(dates) > 10:
-    
+    #Avoid having too many unnecessary dates in data.json    
     del dates[next(islice(dates, 0, None))]
 with open('data.json', 'w') as f:
         json.dump(data,f)
 
-def add_data_today(flag = True):
-    today = date.today()
-    month = str(today.strftime("%m"))
-    day = str(today.strftime("%d"))
-    if flag:
-        with open('data.json', 'r') as f:
-            data = json.load(f)
-            dates = data["Dates"]
-            
-            if "{d}-{m}".format(d=day,m=month) in dates:
-                dates["{d}-{m}".format(d=day,m=month)] += 1
-                with open('data.json', 'w') as f:
-                    json.dump(data,f)
-            else:
-                dates["{d}-{m}".format(d=day,m=month)] = 1
-                with open('data.json', 'w') as f:
-                    json.dump(data,f)
+#This function will be called to add a pomodoro session to today
 
 def changeWhiteText(list_widget):
     for i in list_widget:
@@ -47,13 +34,13 @@ class Window(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # set the title of main window
         self.setWindowTitle("FocusTime")
         self.setWindowIcon(QIcon("logo.png"))
         self.setGeometry(700,700, 800, 500)
+        
         self.setStyleSheet("background-color:#121212")
 		
-		# add all widgets
+		# Switch buttons for each tab
         self.btn_1 = QPushButton('Pomodoro', self)
         self.btn_2 = QPushButton('Todo', self)
         self.btn_3 = QPushButton('Statistic', self)
@@ -64,8 +51,6 @@ class Window(QMainWindow):
         self.btn_2.clicked.connect(self.button2)
         self.btn_3.clicked.connect(self.button3)
 
-
-        # add tabs
         self.tab1 = self.ui1()
         self.tab2 = self.ui2()
         self.tab3 = self.ui3()
@@ -103,7 +88,7 @@ class Window(QMainWindow):
         self.setCentralWidget(main_widget)
 
     # ----------------- 
-    # buttons
+    # Handling switching buttons
 
     def button1(self):
         self.right_widget.setCurrentIndex(0)
@@ -115,7 +100,7 @@ class Window(QMainWindow):
         self.right_widget.setCurrentIndex(2)
 	
 	# ----------------- 
-    # pages
+    # Handling tabs & Create instance of corresponding applications
 
     def ui1(self):
         return Pomodoro()

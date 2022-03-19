@@ -24,6 +24,7 @@ class Chart(QMainWindow):
         dict_dates = dict(enumerate(dates))
         sessions = list(data["Dates"].values())
 
+        #Display string in x axis
         ticks = [list(zip(range(len(dates)), dates))]
         xax = self.graphWidget.getAxis('bottom')
         xax.setTicks(ticks)

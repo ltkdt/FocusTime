@@ -11,16 +11,15 @@ import functools
 with open('data.json', 'r') as f:
     data = json.load(f)
 
+#This windows is shown the add button is clicked
 class AddTaskWindow(QWidget):
-    """
-    This "window" is a QWidget. If it has no parent, it
-    will appear as a free-floating window as we want.
-    """
     def __init__(self):
         super().__init__()
+        
         self.setWindowTitle("AddTask")
         self.setWindowIcon(QIcon("logo.png"))
         self.setGeometry(700,700, 300, 200)
+
         self.setStyleSheet("background-color:#121212")
         self.layout = QVBoxLayout()
         self.lineEdit = QLineEdit()
@@ -33,7 +32,7 @@ class AddTaskWindow(QWidget):
         self.layout.addWidget(self.lineEdit)
         self.layout.addWidget(self.AddTasks)
         self.setLayout(self.layout)
-    
+    #Check if the input for the task is valid (not empty, not duplicate)
     def checkTaskAdded(self):
         inputTasked = self.lineEdit.text()
         if len(inputTasked) != "" and inputTasked not in data["Tasks"]:
@@ -48,10 +47,12 @@ class Todo(QWidget):
     def __init__(self):
         super().__init__()
         self.openAddTask = None
+        '''
         self.setWindowTitle("FocusTime")
         self.setWindowIcon(QIcon("logo.png"))
         self.setGeometry(700,700, 600, 400)
         self.setFixedSize(600,400)
+        '''
         self.setStyleSheet("background-color:#121212")
 
         self.widget_display()
