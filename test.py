@@ -1,2 +1,2 @@
 def do_nothing():
-    pass
+    assert True
