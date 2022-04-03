@@ -11,7 +11,7 @@ from datetime import date
 from pomodoro import Pomodoro
 from todo import Todo,AddTaskWindow
 from chart import Chart
-
+from info import Info
 
 
 with open('data.json', 'r') as f:
@@ -44,16 +44,19 @@ class Window(QMainWindow):
         self.btn_1 = QPushButton('Pomodoro', self)
         self.btn_2 = QPushButton('Todo', self)
         self.btn_3 = QPushButton('Statistic', self)
+        self.btn_4 = QPushButton('About the app', self)
         
-        changeWhiteText([self.btn_1,self.btn_2,self.btn_3])
+        changeWhiteText([self.btn_1,self.btn_2,self.btn_3, self.btn_4])
 
         self.btn_1.clicked.connect(self.button1)
         self.btn_2.clicked.connect(self.button2)
         self.btn_3.clicked.connect(self.button3)
+        self.btn_4.clicked.connect(self.button4)
 
         self.tab1 = self.ui1()
         self.tab2 = self.ui2()
         self.tab3 = self.ui3()
+        self.tab4 = self.ui4()
 
         self.initUI()
 
@@ -62,6 +65,7 @@ class Window(QMainWindow):
         left_layout.addWidget(self.btn_1)
         left_layout.addWidget(self.btn_2)
         left_layout.addWidget(self.btn_3)
+        left_layout.addWidget(self.btn_4)
         left_layout.addStretch(5)
         left_layout.setSpacing(20)
         left_widget = QWidget()
@@ -73,6 +77,7 @@ class Window(QMainWindow):
         self.right_widget.addTab(self.tab1, '')
         self.right_widget.addTab(self.tab2, '')
         self.right_widget.addTab(self.tab3, '')
+        self.right_widget.addTab(self.tab4, '')
 
         self.right_widget.setCurrentIndex(0)
         self.right_widget.setStyleSheet('''QTabBar::tab{width: 0; \
@@ -99,6 +104,8 @@ class Window(QMainWindow):
     def button3(self):
         self.right_widget.setCurrentIndex(2)
 	
+    def button4(self):
+        self.right_widget.setCurrentIndex(3)
 	# ----------------- 
     # Handling tabs & Create instance of corresponding applications
 
@@ -110,6 +117,9 @@ class Window(QMainWindow):
         
     def ui3(self):
         return Chart()
+
+    def ui4(self):
+        return Info()
 
 
 if __name__ == '__main__':

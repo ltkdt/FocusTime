@@ -10,4 +10,11 @@ Dependencies for this projects : `pyqt6`,`pyqtgraph` and `playsound`
 (Note that I used `playsound` because I'm experiencing a bug with QtMultimedia)
 The data is saved in `data.json`
 
+Here is a screenshot of the app:
+
 ![screenshot of the app](https://media.discordapp.net/attachments/906215316730814557/954781501835341885/unknown.png?width=748&height=481 "Screenshot of the app")
+
+This is version 1.0.0. 
+Upcoming features:
+ - Tags for to-do
+ - Assign a session with a task, track the number of time spend on that task
