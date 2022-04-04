@@ -1,1 +1,1 @@
-{"Tasks": [], "Dates": {"13-03": 5, "14-03": 7, "15-03": 2}}
+{"Tasks": ["my new work"], "Dates": {"13-03": 5, "14-03": 7, "15-03": 2}, "Tags": ["work", "life", "New tag", "Delete tag"], "Attached": {"my new work": "life"}}

@@ -8,10 +8,10 @@ import json
 from itertools import islice
 from datetime import date
 
-from pomodoro import Pomodoro
-from todo import Todo,AddTaskWindow
-from chart import Chart
-from info import Info
+from Tabs_widget.pomodoro import Pomodoro
+from Tabs_widget.todo import Todo,AddTaskWindow
+from Tabs_widget.chart import Chart
+from Tabs_widget.info import Info
 
 
 with open('data.json', 'r') as f:

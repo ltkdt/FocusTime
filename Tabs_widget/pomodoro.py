@@ -145,8 +145,8 @@ class Pomodoro(QWidget):
                     self.StartButton.setText("Start a pomodoro session")
             
     
-    def placeholder(self):
-        pass
+    #def placeholder(self):
+    #    pass
            
 
 '''
